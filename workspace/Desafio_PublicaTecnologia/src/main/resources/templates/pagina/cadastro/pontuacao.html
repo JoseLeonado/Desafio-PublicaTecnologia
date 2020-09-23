@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org/">
+	<head th:insert="~{header :: head}">
+		<meta charset="UTF-8">
+	</head>
+		
+	<title>Insert title here</title>
+	
+	<body>
+		<div class="container">
+			<h1>Cadastrar Pontuação</h1>
+			<a class="btn btn-primary" href="/">Voltar</a>
+			<br>
+			<br>
+			<br>
+			<form action="/cadastro/pontuacao/salvar/pontuacao" method="post">
+				<div class="form-row">
+					<div class="form-group col-md-2">
+						<label>Placar da partida</label>
+						<input class="form-control" type="number" name="placar">
+						<input type="hidden" name="id">
+					</div>
+					<div class="form-group col-md-2">
+						<label>Mínimo da temporada</label>
+						<input class="form-control" type="number" name="minimoTemporada" min="1" max="1000">
+						<input type="hidden" name="id">
+					</div>
+					<div class="form-group col-md-2">
+						<label>Máximo da temporada</label>
+						<input class="form-control" type="number" name="maximoTemporada" min="1" max="1000">
+						<input type="hidden" name="id">
+					</div>
+				</div>
+				<button class="btn btn-primary" type="submit">Salvar</button>
+			</form>
+		</div>
+	</body>
+</html>
+
