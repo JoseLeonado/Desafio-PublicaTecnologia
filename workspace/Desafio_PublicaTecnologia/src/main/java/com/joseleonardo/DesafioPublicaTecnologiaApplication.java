@@ -34,12 +34,10 @@ public class DesafioPublicaTecnologiaApplication implements WebMvcConfigurer, Co
 	public void run(String... args) throws Exception {
 		
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(); 
-
-		String resultado = encoder.encode("123");
-		System.out.println(resultado);
+		String senha = encoder.encode("123");
 		
-		Jogadora jogadora = new Jogadora("Maria", "maria@gmail.com", resultado);
-		jogadoraRepository.saveAll(Arrays.asList(jogadora));
+		Jogadora maria = new Jogadora("Maria", "maria@gmail.com", senha);
+		jogadoraRepository.saveAll(Arrays.asList(maria));
 		
 	}
 
