@@ -1,0 +1,19 @@
+.form{
+	width: 400px; 
+	height: 150px; 
+	left: 50%; 
+	margin: -130px 0 0 -210px; 
+	padding:10px;
+	position: absolute; 
+	top: 50%
+}
+
+.form.form-group{
+	width: 150px;	
+}
+
+.btn-primary{
+	width: 100%;	
+}
+
+

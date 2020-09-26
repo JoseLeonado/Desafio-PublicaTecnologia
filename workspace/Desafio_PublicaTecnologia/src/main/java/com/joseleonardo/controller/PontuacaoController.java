@@ -16,13 +16,13 @@ public class PontuacaoController {
 	
 	@GetMapping("/cadastro/pontuacao")
 	public String cadastro() {
-		return "pagina/cadastro/pontuacao";
+		return "paginas/cadastro/pontuacao";
 	}
 	
 	@PostMapping("/cadastro/pontuacao/salvar/pontuacao")
 	public String salvar(Pontuacao pontuacao) {
 		pontuacaoRepository.save(pontuacao);
-		return "pagina/cadastro/pontuacao";
+		return "paginas/cadastro/pontuacao";
 	}
 
 }
