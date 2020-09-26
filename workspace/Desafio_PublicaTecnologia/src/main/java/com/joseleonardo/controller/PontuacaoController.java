@@ -37,18 +37,21 @@ public class PontuacaoController {
 		} else if(!pontuacoes.isEmpty()) {
 			for (Pontuacao p : pontuacoes) {
 				if(pontuacao.getPlacar() < p.getMinimoTemporada()) {
+					int maximoTemporada = pontuacaoRepository.findMaxTemporada();
 					pontuacao.setPlacar(pontuacao.getPlacar());
 					pontuacao.setMinimoTemporada(pontuacao.getPlacar());
 					pontuacao.setQuebraRecordeMin(pontuacao.getQuebraRecordeMin() + 1);
-					pontuacao.setMaximoTemporada(p.getMaximoTemporada());
+					pontuacao.setMaximoTemporada(maximoTemporada);
 					pontuacao.setQuebraRecordeMax(p.getQuebraRecordeMax());
+					System.out.println(pontuacaoRepository.findMinTemporada());
 					pontuacaoRepository.save(pontuacao);
 					break;
 				} else if (pontuacao.getPlacar() > p.getMaximoTemporada()) {
+					int minimoTemporada = pontuacaoRepository.findMinTemporada();
 					pontuacao.setPlacar(pontuacao.getPlacar());
 					pontuacao.setMaximoTemporada(pontuacao.getPlacar());
 					pontuacao.setQuebraRecordeMax(pontuacao.getQuebraRecordeMax() + 1);
-					pontuacao.setMinimoTemporada(p.getMinimoTemporada());
+					pontuacao.setMinimoTemporada(minimoTemporada);
 					pontuacao.setQuebraRecordeMin(p.getQuebraRecordeMin());
 					pontuacaoRepository.save(pontuacao);
 					break;
