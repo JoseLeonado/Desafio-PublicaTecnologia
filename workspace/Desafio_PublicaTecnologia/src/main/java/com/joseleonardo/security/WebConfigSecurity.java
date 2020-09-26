@@ -29,7 +29,7 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
 		.and()
 		.formLogin().permitAll()
         .loginPage("/login")
-        .defaultSuccessUrl("/cadastro/pontuacao")
+        .defaultSuccessUrl("/menu")
         .failureUrl("/login?error=true")
         .and()
         .logout().logoutSuccessUrl("/login")
