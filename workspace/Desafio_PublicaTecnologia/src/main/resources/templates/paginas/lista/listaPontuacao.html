@@ -17,26 +17,26 @@
 			<table class="table table-srtiped table-bordered table-hover">
 				<thead>
 					<tr>
-						<th>Jogo</th>
-						<th>Placar</th>
-						<th>Mínimo da
+						<th style="text-align: center; padding-bottom: 35px">Jogo</th>
+						<th style="text-align: center; padding-bottom: 35px">Placar</th>
+						<th style="text-align: center">Mínimo da<br>
 							Temporada</th>
-						<th>Máximo da
+						<th style="text-align: center">Máximo da<br>
 							Temporada</th>
-						<th>Quebra recorde
+						<th style="text-align: center">Quebra recorde<br>
 							mín</th>
-						<th>Quebra recorde
+						<th style="text-align: center">Quebra recorde<br>
 							máx</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="recorde : ${recordes}">
-						<td th:text="${recorde.id}"></td>
-						<td th:text="${recorde.placar}"></td>
-						<td th:text="${recorde.minimoTemporada}"></td>
-						<td th:text="${recorde.maximoTemporada}"></td>
-						<td th:text="${recorde.quebraRecordeMin}"></td>
-						<td th:text="${recorde.quebraRecordeMax}"></td>
+						<td th:text="${recorde.id}" style="text-align: center"></td>
+						<td th:text="${recorde.placar}" style="text-align: center"></td>
+						<td th:text="${recorde.minimoTemporada}" style="text-align: center"></td>
+						<td th:text="${recorde.maximoTemporada}" style="text-align: center"></td>
+						<td th:text="${recorde.quebraRecordeMin}" style="text-align: center"></td>
+						<td th:text="${recorde.quebraRecordeMax}" style="text-align: center"></td>
 					</tr>
 			</tbody>
 		</table>
