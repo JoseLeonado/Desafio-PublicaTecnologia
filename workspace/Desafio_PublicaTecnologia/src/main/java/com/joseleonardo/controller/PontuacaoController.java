@@ -22,7 +22,7 @@ public class PontuacaoController {
 		return "paginas/cadastro/pontuacao";
 	}
 
-	@PostMapping("/cadastro/pontuacao/salvar/pontuacao")
+	@PostMapping("/cadastro/pontuacao/salvar")
 	public String salvar(Pontuacao pontuacao, Model model) {
 
 		List<Pontuacao> pontuacoes = pontuacaoRepository.findAll();
