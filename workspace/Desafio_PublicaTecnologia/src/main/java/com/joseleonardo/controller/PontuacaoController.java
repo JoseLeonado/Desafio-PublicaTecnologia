@@ -73,5 +73,11 @@ public class PontuacaoController {
 		}
 		return "paginas/cadastro/pontuacao";
 	}
+	
+	@GetMapping("/lista/pontuacao")
+	public String lista(Model model) {
+		model.addAttribute("recordes", pontuacaoRepository.findAll());
+		return "paginas/lista/listaPontuacao";
+	}
 
 }
