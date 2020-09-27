@@ -19,16 +19,22 @@
 			<form action="/cadastro/pontuacao/salvar" method="post">
 				<div class="form-row">
 					<div class="form-group col-md-2">
+						<label>Jogo</label>
+						<input class="form-control" type="number" name="id" th:value="${pontuacao.id}" disabled="disabled">
+					</div>
+				</div>
+				<div class="form-row">
+					<div class="form-group col-md-2">
 						<label>Placar da partida</label>
-						<input class="form-control" type="number" name="placar" min="1" max="999">
+						<input class="form-control" type="number" name="placar" th:value="${pontuacao.placar}" min="1" max="999">
 					</div>
 					<div class="form-group col-md-2">
 						<label>Mínimo da temporada</label>
-						<input class="form-control" type="number" name="minimoTemporada" th:value="${minTemporada}" disabled="disabled" >
+						<input class="form-control" type="number" name="minimoTemporada" th:value="${pontuacao.minimoTemporada}" disabled="disabled">
 					</div>
 					<div class="form-group col-md-2">
 						<label>Máximo da temporada</label>
-						<input class="form-control" type="number" name="maximoTemporada" th:value="${maxTemporada}" disabled="disabled" >
+						<input class="form-control" type="number" name="maximoTemporada" th:value="${pontuacao.minimoTemporada}" disabled="disabled">
 					</div>
 				</div>
 				<div class="form-row">

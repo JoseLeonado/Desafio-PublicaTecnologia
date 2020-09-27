@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.joseleonardo.model.Pontuacao;
@@ -18,7 +19,7 @@ public class PontuacaoController {
 	private PontuacaoRepository pontuacaoRepository;
 
 	@GetMapping("/cadastro/pontuacao")
-	public String cadastro() {
+	public String cadastro(Pontuacao pontuacao, Model model) {
 		return "paginas/cadastro/pontuacao";
 	}
 
@@ -26,7 +27,6 @@ public class PontuacaoController {
 	public String salvar(Pontuacao pontuacao, Model model) {
 
 		List<Pontuacao> pontuacoes = pontuacaoRepository.findAll();
-
 		
 		if (pontuacoes.isEmpty()) {
 			pontuacao.setPlacar(pontuacao.getPlacar());
@@ -49,8 +49,8 @@ public class PontuacaoController {
 				pontuacao.setMaximoTemporada(maximoTemporada);
 				pontuacao.setQuebraRecordeMax(recordeMax);
 				pontuacaoRepository.save(pontuacao);
-				model.addAttribute("minTemporada", pontuacao.getPlacar());
-				model.addAttribute("maxTemporada", maximoTemporada);
+				model.addAttribute("minTemporada", pontuacaoRepository.findMinTemporada());
+				model.addAttribute("maxTemporada", pontuacaoRepository.findMaxTemporada());
 			} else if (pontuacao.getPlacar() > maximoTemporada) {
 				pontuacao.setPlacar(pontuacao.getPlacar());
 				pontuacao.setMaximoTemporada(pontuacao.getPlacar());
@@ -58,8 +58,8 @@ public class PontuacaoController {
 				pontuacao.setMinimoTemporada(minimoTemporada);
 				pontuacao.setQuebraRecordeMin(recordeMin);
 				pontuacaoRepository.save(pontuacao);
-				model.addAttribute("maxTemporada", pontuacao.getPlacar());
-				model.addAttribute("minTemporada", minimoTemporada);
+				model.addAttribute("minTemporada", pontuacaoRepository.findMinTemporada());
+				model.addAttribute("maxTemporada", pontuacaoRepository.findMaxTemporada());
 			} else {
 				pontuacao.setPlacar(pontuacao.getPlacar());
 				pontuacao.setMinimoTemporada(minimoTemporada);
@@ -67,8 +67,8 @@ public class PontuacaoController {
 				pontuacao.setQuebraRecordeMin(recordeMin);
 				pontuacao.setQuebraRecordeMax(recordeMax);
 				pontuacaoRepository.save(pontuacao);
-				model.addAttribute("minTemporada", minimoTemporada);
-				model.addAttribute("maxTemporada", maximoTemporada);
+				model.addAttribute("minTemporada", pontuacaoRepository.findMinTemporada());
+				model.addAttribute("maxTemporada", pontuacaoRepository.findMaxTemporada());
 			}
 		}
 		return "paginas/cadastro/pontuacao";
@@ -76,8 +76,24 @@ public class PontuacaoController {
 	
 	@GetMapping("/lista/pontuacao")
 	public String lista(Model model) {
-		model.addAttribute("recordes", pontuacaoRepository.findAll());
+		model.addAttribute("pontuacoes", pontuacaoRepository.findAll());
 		return "paginas/lista/listaPontuacao";
 	}
-
+	
+	@GetMapping("/cadastro/pontuacao/editar/{id}")
+	public String editar(@PathVariable("id") Long id, Model model) {
+		Pontuacao pontuacao = pontuacaoRepository.getOne(id);
+		model.addAttribute("pontuacao", pontuacao);
+		return "paginas/editar/editarPontuacao";
+	}
+	
+	@GetMapping("/cadastro/pontuacao/excluir/{id}")
+	public String excluir(@PathVariable("id") Long id, Model model) {
+		pontuacaoRepository.deleteById(id);
+		return lista(model);
+	}
+	
+	
+	
+	
 }
