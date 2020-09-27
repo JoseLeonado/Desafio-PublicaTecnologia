@@ -34,36 +34,32 @@ public class PontuacaoController {
 			pontuacao.setQuebraRecordeMin(0);
 			pontuacao.setQuebraRecordeMax(0);
 			pontuacaoRepository.save(pontuacao);
-		} else if(!pontuacoes.isEmpty()) {
-			for (Pontuacao p : pontuacoes) {
-				if(pontuacao.getPlacar() < p.getMinimoTemporada()) {
-					int maximoTemporada = pontuacaoRepository.findMaxTemporada();
-					pontuacao.setPlacar(pontuacao.getPlacar());
-					pontuacao.setMinimoTemporada(pontuacao.getPlacar());
-					pontuacao.setQuebraRecordeMin(pontuacao.getQuebraRecordeMin() + 1);
-					pontuacao.setMaximoTemporada(maximoTemporada);
-					pontuacao.setQuebraRecordeMax(p.getQuebraRecordeMax());
-					System.out.println(pontuacaoRepository.findMinTemporada());
-					pontuacaoRepository.save(pontuacao);
-					break;
-				} else if (pontuacao.getPlacar() > p.getMaximoTemporada()) {
-					int minimoTemporada = pontuacaoRepository.findMinTemporada();
-					pontuacao.setPlacar(pontuacao.getPlacar());
-					pontuacao.setMaximoTemporada(pontuacao.getPlacar());
-					pontuacao.setQuebraRecordeMax(pontuacao.getQuebraRecordeMax() + 1);
-					pontuacao.setMinimoTemporada(minimoTemporada);
-					pontuacao.setQuebraRecordeMin(p.getQuebraRecordeMin());
-					pontuacaoRepository.save(pontuacao);
-					break;
-				} else {
-					pontuacao.setPlacar(pontuacao.getPlacar());
-					pontuacao.setMinimoTemporada(p.getMinimoTemporada());
-					pontuacao.setMaximoTemporada(p.getMaximoTemporada());
-					pontuacao.setQuebraRecordeMin(p.getQuebraRecordeMin());
-					pontuacao.setQuebraRecordeMax(p.getQuebraRecordeMax());
-					pontuacaoRepository.save(pontuacao);
-					break;
-				}
+		} else if (!pontuacoes.isEmpty()) {
+			int minimoTemporada = pontuacaoRepository.findMinTemporada();
+			int maximoTemporada = pontuacaoRepository.findMaxTemporada();
+			int recordeMin = pontuacaoRepository.findRecordeMin();
+			int recordeMax = pontuacaoRepository.findRecordeMax();
+			if (pontuacao.getPlacar() < minimoTemporada) {
+				pontuacao.setPlacar(pontuacao.getPlacar());
+				pontuacao.setMinimoTemporada(pontuacao.getPlacar());
+				pontuacao.setQuebraRecordeMin(recordeMin + 1);
+				pontuacao.setMaximoTemporada(maximoTemporada);
+				pontuacao.setQuebraRecordeMax(recordeMax);
+				pontuacaoRepository.save(pontuacao);
+			} else if (pontuacao.getPlacar() > maximoTemporada) {
+				pontuacao.setPlacar(pontuacao.getPlacar());
+				pontuacao.setMaximoTemporada(pontuacao.getPlacar());
+				pontuacao.setQuebraRecordeMax(recordeMax + 1);
+				pontuacao.setMinimoTemporada(minimoTemporada);
+				pontuacao.setQuebraRecordeMin(recordeMin);
+				pontuacaoRepository.save(pontuacao);
+			} else {
+				pontuacao.setPlacar(pontuacao.getPlacar());
+				pontuacao.setMinimoTemporada(minimoTemporada);
+				pontuacao.setMaximoTemporada(maximoTemporada);
+				pontuacao.setQuebraRecordeMin(recordeMin);
+				pontuacao.setQuebraRecordeMax(recordeMax);
+				pontuacaoRepository.save(pontuacao);
 			}
 		}
 		return "paginas/cadastro/pontuacao";
