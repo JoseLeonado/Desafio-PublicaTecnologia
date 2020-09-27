@@ -27,6 +27,7 @@ public class PontuacaoController {
 
 		List<Pontuacao> pontuacoes = pontuacaoRepository.findAll();
 
+		
 		if (pontuacoes.isEmpty()) {
 			pontuacao.setPlacar(pontuacao.getPlacar());
 			pontuacao.setMinimoTemporada(pontuacao.getPlacar());
@@ -34,6 +35,8 @@ public class PontuacaoController {
 			pontuacao.setQuebraRecordeMin(0);
 			pontuacao.setQuebraRecordeMax(0);
 			pontuacaoRepository.save(pontuacao);
+			model.addAttribute("minTemporada", pontuacao.getPlacar());
+			model.addAttribute("maxTemporada", pontuacao.getPlacar());
 		} else if (!pontuacoes.isEmpty()) {
 			int minimoTemporada = pontuacaoRepository.findMinTemporada();
 			int maximoTemporada = pontuacaoRepository.findMaxTemporada();
@@ -46,6 +49,8 @@ public class PontuacaoController {
 				pontuacao.setMaximoTemporada(maximoTemporada);
 				pontuacao.setQuebraRecordeMax(recordeMax);
 				pontuacaoRepository.save(pontuacao);
+				model.addAttribute("minTemporada", pontuacao.getPlacar());
+				model.addAttribute("maxTemporada", maximoTemporada);
 			} else if (pontuacao.getPlacar() > maximoTemporada) {
 				pontuacao.setPlacar(pontuacao.getPlacar());
 				pontuacao.setMaximoTemporada(pontuacao.getPlacar());
@@ -53,6 +58,8 @@ public class PontuacaoController {
 				pontuacao.setMinimoTemporada(minimoTemporada);
 				pontuacao.setQuebraRecordeMin(recordeMin);
 				pontuacaoRepository.save(pontuacao);
+				model.addAttribute("maxTemporada", pontuacao.getPlacar());
+				model.addAttribute("minTemporada", minimoTemporada);
 			} else {
 				pontuacao.setPlacar(pontuacao.getPlacar());
 				pontuacao.setMinimoTemporada(minimoTemporada);
@@ -60,6 +67,8 @@ public class PontuacaoController {
 				pontuacao.setQuebraRecordeMin(recordeMin);
 				pontuacao.setQuebraRecordeMax(recordeMax);
 				pontuacaoRepository.save(pontuacao);
+				model.addAttribute("minTemporada", minimoTemporada);
+				model.addAttribute("maxTemporada", maximoTemporada);
 			}
 		}
 		return "paginas/cadastro/pontuacao";
