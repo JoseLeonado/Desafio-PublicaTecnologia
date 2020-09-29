@@ -25,11 +25,11 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
 		http.csrf()
 		.disable()/* Desativa as configurações padrão de memória */
 		.authorizeRequests() /* Restringir acessos  */
-		.antMatchers(HttpMethod.GET, "/login").permitAll()/* Qualquer usário acessa a página de login */
+		.antMatchers(HttpMethod.GET, "/login").permitAll()/* Qualquer usário acessa o formulário de login */
 		.anyRequest().authenticated()
 		.and()
 		.formLogin().permitAll()
-        .loginPage("/login")/* Redireciona para a página de login com bootstrap */
+        .loginPage("/login")/* Redireciona para a formulário de login com bootstrap */
         .defaultSuccessUrl("/menu")/* Após logar, redirecionar para a página de menu */
         .failureUrl("/login?error=true")/* Se o login estiver errado, redirecionar para o formulário de login */
         .and()

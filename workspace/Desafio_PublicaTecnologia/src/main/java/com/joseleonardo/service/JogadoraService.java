@@ -18,12 +18,15 @@ public class JogadoraService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
+		/* Passa o e-mail na requisição */
 		Jogadora jogadora = jogadoraRepository.findJogadoraByEmail(username);
 		
+		/* Se o e-mail não for válido, retorna um erro */
 		if (jogadora == null) {
 			throw new UsernameNotFoundException("Usuário não encontrado");
 		}
 		
+		/* Se o e-mail for válido, retorna a jogadora do e-mail */
 		return jogadora;
 	}
 
