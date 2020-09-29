@@ -20,12 +20,13 @@ public class DesafioPublicaTecnologiaApplication implements WebMvcConfigurer, Co
 		SpringApplication.run(DesafioPublicaTecnologiaApplication.class, args);
 	}
 	
+	
+	/* Redirecionamento do /login do WebSecurity para nosso login personalizado */
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController("/login").setViewName("/login");
 		
 	}
-	
 	
 	@Autowired
 	private JogadoraRepository jogadoraRepository;
@@ -33,9 +34,11 @@ public class DesafioPublicaTecnologiaApplication implements WebMvcConfigurer, Co
 	@Override
 	public void run(String... args) throws Exception {
 		
+		/* Gera a senha criptografada */	
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(); 
 		String senha = encoder.encode("123");
-		
+
+		/* Sempre cria esse objeto ao subir a aplicação e salva no banco de dados */
 		Jogadora maria = new Jogadora("Maria", "maria@gmail.com", senha);
 		jogadoraRepository.saveAll(Arrays.asList(maria));
 		
