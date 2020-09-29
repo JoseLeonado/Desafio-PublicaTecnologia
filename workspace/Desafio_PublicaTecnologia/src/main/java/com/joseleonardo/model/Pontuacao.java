@@ -5,9 +5,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/* Criação da classe e tabela Pontuacao */
 @Entity
 public class Pontuacao {
 
+	/* Id auto_increment */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

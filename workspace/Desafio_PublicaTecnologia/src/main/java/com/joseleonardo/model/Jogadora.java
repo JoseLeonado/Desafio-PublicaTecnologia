@@ -11,16 +11,19 @@ import javax.persistence.Id;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+/* Criação da classe e tabela Jogadora */
 @Entity
 public class Jogadora implements UserDetails {
 	private static final long serialVersionUID = 1L;
 
+	/* Id auto_increment */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	private String nome;
 
+	/* E-mail é único, ou seja, não pode se repetir */
 	@Column(unique = true)
 	private String email;
 
