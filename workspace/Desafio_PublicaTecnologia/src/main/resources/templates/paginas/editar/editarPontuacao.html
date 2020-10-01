@@ -18,6 +18,12 @@
 			<br>
 			<form action="/cadastro/pontuacao/salvar" method="post">
 			<input type="hidden" name="id" th:value="${pontuacao.id}">
+				<div class="aler alert-danger" 
+					th:if="${not #strings.isEmpty(erros)}" >
+					<div th:each="erro : ${erros}">
+						<span th:text="${erro.getDefaultMessage()}"></span>
+					</div>
+				</div>
 				<div class="form-row">
 					<div class="form-group col-md-2">
 						<label>Jogo</label>

@@ -2,9 +2,12 @@ package com.joseleonardo.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,10 +30,16 @@ public class PontuacaoController {
 
 	/* Requisição para salvar pontuações e retorna novamente para a tela de formulário */
 	@PostMapping("/cadastro/pontuacao/salvar")
-	public String salvar(Pontuacao pontuacao, Model model) {
+	public String salvar(@Valid Pontuacao pontuacao, BindingResult bindingResult, Model model) {
 
 		/* Retorna todas pontuações salva no banco de dados */
 		List<Pontuacao> pontuacoes = pontuacaoRepository.findAll();
+		
+	
+		if(bindingResult.hasErrors()) {
+			model.addAttribute("erros", bindingResult.getAllErrors());
+			return "paginas/cadastro/pontuacao";
+		}
 		
 		/* Sempre que a aplicação for iniciada estará sem dados no banco. */
 		if (pontuacoes.isEmpty()) { /* O primeiro cadastro sempre cairá aqui */

@@ -20,7 +20,6 @@ public class DesafioPublicaTecnologiaApplication implements WebMvcConfigurer, Co
 		SpringApplication.run(DesafioPublicaTecnologiaApplication.class, args);
 	}
 	
-	
 	/* Redirecionamento do /login do WebSecurity para nosso login personalizado */
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
