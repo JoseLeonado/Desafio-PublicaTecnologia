@@ -26,7 +26,6 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
 		.disable()/* Desativa as configurações padrão de memória */
 		.authorizeRequests() /* Restringir acessos  */
 		.antMatchers(HttpMethod.GET, "/login").permitAll()/* Qualquer usário acessa o formulário de login */
-		.anyRequest().authenticated()
 		.and()
 		.formLogin().permitAll()
         .loginPage("/login")/* Redireciona para a formulário de login com bootstrap */
